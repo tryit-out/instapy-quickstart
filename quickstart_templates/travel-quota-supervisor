@@ -1,0 +1,70 @@
+"""
+This template is written by @Ewwwer
+
+What does this quickstart script aim to do?
+Like Comments, follow, follow else followers and unfollow with quota supervisor. 
+I'm trying it 
+"""
+
+from instapy import InstaPy
+from instapy.util import smart_run
+
+# get a session!
+session = InstaPy(username='ewwwer', password='wttaparteme')
+
+# let's go! :>
+with smart_run(session):
+    # settings
+    session.set_quota_supervisor(enabled=True, sleep_after=["likes", "comments_d", "follows", "unfollows", "server_calls_h"],
+                                 sleepyhead=True, stochastic_flow=True,
+                                 notify_me=True,
+                                 peak_likes=(57, 600), peak_follows=(48, None),
+                                 peak_unfollows=(35, 402),
+                                 peak_server_calls=(500, 4700))
+    session.set_relationship_bounds(enabled=True,
+                                potency_ratio=None,
+                                delimit_by_numbers=True,
+                                max_followers=8500,
+                                max_following=4490,
+                                min_followers=100,
+                                min_following=56,
+                                min_posts=10)
+    session.set_user_interact(amount=5, randomize=True, percentage=50,
+                              media='Photo')
+    session.set_do_like(enabled=True, percentage=70)
+    session.set_do_comment(enabled=True, percentage=30)
+    session.set_comments(['Amazing!:fire: @{}', 'So cool!!:fire::fire: @{}', 'WOW!:fire:', 'WOW looks nice!:fire:'], media='Photo')
+    session.set_use_clarifai(enabled=True, api_key='10af91e432b7426dbcdda482da0a27d2')
+    session.clarifai_check_img_for(['nsfw', 'gay', 'hijab', 'niqab', 'religion', 'shirtless', 'fitness','yamaka', 'rightwing', 'sexy', 'sex'], comment=False)
+    session.set_dont_like(['dick', 'squirt', 'gay', 'homo', '#fit', '#fitfam', '#fittips','#abs', '#kids', '#children', '#child','[nazi','jew', 'judaism', '[muslim', '[islam', 'bangladesh', '[hijab', '[niqab', '[farright', '[rightwing','#conservative', 'death', 'racist'])
+    session.set_do_follow(enabled=True, percentage=25, times=2)
+    session.set_skip_users(skip_private=True,
+                       private_percentage=100,
+                       skip_no_profile_pic=True,
+                       no_profile_pic_percentage=100,)
+
+    # activity
+    session.set_smart_hashtags(
+        ['travelling', 'viajero', 'travel', 'travelingram', 'igtravel','traveller', 'travelphoto', 'travelphotography', 'globetrotter', 'viajar','viejero', 'amoviajar', 'viajaresvivir'], limit=2, sort='random', log_tags=True)
+    session.like_by_tags(amount=20, use_smart_hashtags=True)
+    session.set_dont_like(['promoter', 'nightclub', 'viajargratis', 'emprendedor', 'money', 'negocio digital'])
+    session.set_delimit_liking(enabled=True, max=1000, min=10)
+    
+    # interact user followers activity
+    session.set_user_interact(amount=5, randomize=True, percentage=50,
+                              media='Photo')
+    session.set_do_follow(enabled=True, percentage=70)
+    session.set_do_like(enabled=True, percentage=70)
+    session.set_comments(["Amazing!", "So cool!!", "WOW!", "WOW looks nice!"])
+    session.set_do_comment(enabled=True, percentage=30)
+    session.interact_user_followers(['hiclavero'], amount=random.randint(1, 10),
+                                    randomize=True)
+    
+     # unfollow activity
+    session.unfollow_users(amount=126, nonFollowers=True, style="RANDOM",
+                           unfollow_after=42 * 60 * 60, sleep_delay=300)
+    # follow activity
+    ammount_number = 200
+    session.follow_user_followers(['hiclavero'],
+                                  amount=ammount_number, randomize=False,
+                                  interact=True, sleep_delay=240)
